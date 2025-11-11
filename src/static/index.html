@@ -12,10 +12,7 @@
     />
   </head>
   <body>
-  <div class="announcement-banner" aria-label="Important: Activity registration is open until the end of the month. Don't lose your spot!">
-    <span aria-hidden="true">📢</span>
-    <strong>Important:</strong> Activity registration is open until the end of the month. Don't lose your spot!
-  </div>
+  <div id="announcements-container" aria-live="polite"></div>
     <header>
       <h1>Mergington High School</h1>
       <h2>Extracurricular Activities</h2>
@@ -24,6 +21,10 @@
           <button id="login-button" class="icon-button">
             <span class="user-icon">👤</span>
             <span>Login</span>
+          </button>
+          <button id="manage-announcements-button" class="icon-button hidden" title="Manage announcements">
+            <span aria-hidden="true">📣</span>
+            <span>Manage</span>
           </button>
           <div id="user-info" class="hidden">
             <span id="display-name"></span>
@@ -135,6 +136,47 @@
           <button type="submit">Login</button>
         </form>
         <div id="login-message" class="hidden message"></div>
+      </div>
+    </div>
+
+    <!-- Announcements Manager Modal (for signed-in teachers) -->
+    <div id="announcements-modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close-announcements-modal">&times;</span>
+        <h3>Manage Announcements</h3>
+        <div id="announcements-manager">
+          <div id="announcements-list">
+            <!-- loaded dynamically -->
+            <p>Loading announcements...</p>
+          </div>
+
+          <hr />
+          <h4>Create / Edit Announcement</h4>
+          <form id="announcement-form">
+            <div class="form-group">
+              <label for="ann-title">Title</label>
+              <input id="ann-title" type="text" required placeholder="Short title" />
+            </div>
+            <div class="form-group">
+              <label for="ann-message">Message</label>
+              <textarea id="ann-message" rows="3" required placeholder="Announcement message"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="ann-start">Start date (optional)</label>
+              <input id="ann-start" type="date" />
+            </div>
+            <div class="form-group">
+              <label for="ann-expire">Expire date (required)</label>
+              <input id="ann-expire" type="date" required />
+            </div>
+            <input type="hidden" id="ann-id" value="" />
+            <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px;">
+              <button type="button" id="ann-cancel" class="cancel-btn">Cancel</button>
+              <button type="submit" id="ann-save" class="confirm-btn">Save</button>
+            </div>
+            <div id="ann-form-message" class="hidden message" style="margin-top:8px"></div>
+          </form>
+        </div>
       </div>
     </div>
 
